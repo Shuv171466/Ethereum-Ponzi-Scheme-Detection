@@ -1,0 +1,47 @@
+\documentclass[conference]{IEEEtran}
+\usepackage{amsmath}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+
+\begin{document}
+
+\begin{algorithm}[htbp]
+\caption{Proposed Hybrid Ponzi Smart Contract Detection Framework}
+\label{alg:framework}
+\begin{algorithmic}[1]
+
+\Require Ethereum transaction data $D_t$, contract bytecode $B$
+\Ensure Set of identified suspicious contracts $S$, Performance metrics $M$
+
+\State \textbf{Step 1: Feature Engineering}
+\State Extract account-level features $F_a$ and code/opcode features $F_c$
+\State Integrate multi-modal features: $X = F_a \cup F_c$
+\State Apply Min-Max normalization: $x' = \frac{x - \min(x)}{\max(x) - \min(x)}$
+
+\State \textbf{Step 2: Hybrid Detection Pipeline}
+\State Initialize and train four distinct hybrid configurations:
+\Statex \hspace{0.5cm} (i) Isolation Forest + SMOTE
+\Statex \hspace{0.5cm} (ii) Isolation Forest + XGBoost
+\Statex \hspace{0.5cm} (iii) Autoencoder + SMOTE
+\Statex \hspace{0.5cm} (iv) Autoencoder + XGBoost
+
+\For{each instance $x_i \in X$}
+    \State Compute $IF$ anomaly score $s(x_i)$ and $AE$ reconstruction loss $\mathcal{L}(x_i)$
+    \State \textbf{if} $s(x_i) > \tau$ \textbf{or} $\mathcal{L}(x_i) > \tau'$ \textbf{then} mark $x_i$ as suspicious
+\EndFor
+
+\State \textbf{Step 3: Model Evaluation and Verification}
+\State Quantify performance for each configuration based on:
+\Statex \hspace{0.5cm} $\bullet$ Silhouette Score (Cluster Separation Quality)
+\Statex \hspace{0.5cm} $\bullet$ Contamination Ratio (Proportion of Outliers)
+\Statex \hspace{0.5cm} $\bullet$ Suspicious Count (Identified Potential Ponzi Candidates)
+
+\State Verify identified $S$ using \textbf{XBlock-Pro} ground truth labels
+\State Select optimal model based on $M$ 
+
+\State \Return $S, M$
+
+\end{algorithmic}
+\end{algorithm}
+
+\end{document}

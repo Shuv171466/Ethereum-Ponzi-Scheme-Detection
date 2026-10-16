@@ -1,0 +1,44 @@
+\documentclass{article}
+\usepackage{tikz}
+\usepackage[margin=1in]{geometry}
+\usepackage{xcolor}
+
+\begin{document}
+
+\begin{figure}[htbp]
+\centering
+
+\begin{tikzpicture}
+
+% -------- LEFT WORD CLOUD --------
+\node[font=\bfseries\fontsize{40}{42}\selectfont, text=blue] at (-5,0) {JUMPI};
+\node[font=\bfseries\fontsize{28}{30}\selectfont, text=brown] at (-5,1.5) {MSTORE};
+\node[font=\bfseries\fontsize{22}{24}\selectfont, text=purple] at (-6.5,2.5) {EQ};
+\node[font=\bfseries\fontsize{20}{22}\selectfont, text=red] at (-4,2.8) {ISZERO};
+\node[font=\bfseries\fontsize{18}{20}\selectfont, text=green!60!black] at (-6,0.5) {GT};
+\node[font=\bfseries\fontsize{18}{20}\selectfont, text=orange] at (-3.8,1.2) {EXP};
+\node[font=\bfseries\fontsize{16}{18}\selectfont, text=magenta] at (-5.5,-1.2) {MLOAD};
+\node[font=\bfseries\fontsize{16}{18}\selectfont, text=cyan!60!black] at (-4.2,0.3) {DIV};
+\node[font=\bfseries\fontsize{16}{18}\selectfont, text=black] at (-6.8,1.2) {CALLDATALOAD};
+\node[font=\bfseries\fontsize{16}{18}\selectfont, text=olive] at (-3.5,2.0) {SUB};
+
+% -------- RIGHT WORD CLOUD --------
+\node[font=\bfseries\fontsize{40}{42}\selectfont, text=green!70!black] at (5,0) {JUMP};
+\node[font=\bfseries\fontsize{30}{32}\selectfont, text=olive] at (5,1.5) {MSTORE};
+\node[font=\bfseries\fontsize{28}{30}\selectfont, text=darkgray] at (6.5,3) {ADD};
+\node[font=\bfseries\fontsize{24}{26}\selectfont, text=green!50!black] at (3.8,2.5) {SUB};
+\node[font=\bfseries\fontsize{20}{22}\selectfont, text=blue!70!black] at (4.5,0.5) {EQ};
+\node[font=\bfseries\fontsize{20}{22}\selectfont, text=red] at (5.8,1.0) {EXP};
+\node[font=\bfseries\fontsize{18}{20}\selectfont, text=green] at (6.5,2.0) {ISZERO};
+\node[font=\bfseries\fontsize{18}{20}\selectfont, text=cyan!70!black] at (3.8,1.2) {MLOAD};
+\node[font=\bfseries\fontsize{16}{18}\selectfont, text=black] at (6.8,1.8) {LT};
+\node[font=\bfseries\fontsize{16}{18}\selectfont, text=purple] at (4.2,2.0) {CALLVALUE};
+
+\end{tikzpicture}
+
+\caption{Opcode frequency visualization for two smart contract datasets (word cloud representation).}
+\label{fig:opcode_wordcloud}
+
+\end{figure}
+
+\end{document}

@@ -1,0 +1,67 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+
+\title{isolation forest}
+\author{Shuvasish Saha}
+\date{April 2026}
+
+\begin{document}
+
+\maketitle
+\subsubsection{The Anomaly Score Formula}
+The anomaly score $s(x, n)$ for an instance $x$ is defined as:
+\begin{equation}
+    s(x, n) = 2^{-\frac{E(h(x))}{c(n)}}
+\end{equation}
+
+Where $c(n)$ is the normalization factor calculated as:
+\begin{equation}
+    c(n) = 2 \ln(n - 1) + 0.5772156649 - \frac{2(n - 1)}{n}
+\end{equation}
+
+\textbf{Variable Breakdown:}
+\begin{itemize}
+    \item \textbf{$x$}: The specific smart contract instance being analyzed.
+    \item \textbf{$n$}: The number of instances used to build the isolation trees.
+    \item \textbf{$h(x)$}: The path length (number of edges) from the root node to the external leaf node where $x$ terminates.
+    \item \textbf{$E(h(x))$}: The Expected (Average) Path Length of $x$ across a collection of isolation trees (iTrees).
+\end{itemize}
+\subsubsection{Autoencoder-Based Detection}
+The Autoencoder identifies anomalies by calculating the reconstruction error for each instance. The anomaly score is defined using the Mean Squared Error (MSE):
+
+\begin{equation}
+    L(x, \hat{x}) = \frac{1}{m} \sum_{j=1}^{m} (x_j - \hat{x}_j)^2
+\end{equation}
+
+\textbf{Variable Breakdown:}
+\begin{itemize}
+    \item \textbf{$x$}: The original input feature vector representing the smart contract.
+    \item \textbf{$\hat{x}$}: The reconstructed feature vector produced by the decoder.
+    \item \textbf{$m$}: The total number of input features in the dataset.
+    \item \textbf{$L(x, \hat{x})$}: The reconstruction loss, which serves as the indicator for potential fraudulent activity.
+\end{itemize}
+\subsubsection{XGBoost Objective Function and Regularization}
+The final classification layer employs XGBoost, which minimizes a regularized objective function at iteration $t$:
+
+\begin{equation}
+    \text{Obj}^{(t)} = \sum_{i=1}^{n} L(y_i, \hat{y}_i^{(t)}) + \sum_{k=1}^{t} \Omega(f_k)
+\end{equation}
+
+To mitigate overfitting, the complexity of each tree $f$ is constrained by the regularization term $\Omega(f)$, incorporating $L1$ ($\alpha$) and $L2$ ($\lambda$) penalties:
+
+\begin{equation}
+    \Omega(f) = \gamma T + \frac{1}{2} \lambda \|w\|^2 + \alpha \|w\|
+\end{equation}
+
+\textbf{Variable Breakdown:}
+\begin{itemize}
+    \item \textbf{$L$}: Differentiable loss function measuring prediction error.
+    \item \textbf{$T$}: Total number of leaf nodes in the tree.
+    \item \textbf{$w$}: The leaf weight vector.
+    \item \textbf{$\gamma$}: The complexity cost for adding an additional leaf.
+    \item \textbf{$\lambda, \alpha$}: Regularization coefficients for $L2$ and $L1$ norms, respectively.
+\end{itemize}
+
+\section{Introduction}
+
+\end{document}
